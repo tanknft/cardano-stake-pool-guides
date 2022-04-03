@@ -82,6 +82,12 @@ sudo ufw disable
 sudo nano /etc/ssh/sshd_config
 ```
 
+Locate **Port** and customize it to 5672
+
+```bash
+Port 5672
+```
+
 Locate **ChallengeResponseAuthentication** and update to no
 
 ```
@@ -97,7 +103,7 @@ PasswordAuthentication no
 Locate **PermitRootLogin** and update to no
 
 ```
-PermitRootLogin prohibit-password
+PermitRootLogin no
 ```
 
 Locate **PermitEmptyPasswords** and update to no
@@ -105,11 +111,7 @@ Locate **PermitEmptyPasswords** and update to no
 ```
 PermitEmptyPasswords no
 ```
-Locate **Port** and customize it to 5672
 
-```bash
-Port 5672
-```
 
 In the end save the file by pressing CTRL + X, pressing Y and then Enter
 
