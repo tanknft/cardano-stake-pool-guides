@@ -1,11 +1,8 @@
----
-description: Quick steps to secure your node.
----
 
 # Hardening an Ubuntu Server
 
 
-## :man\_mage: Creating a Non-root User with sudo Privileges
+## Creating a Non-root User with sudo Privileges
 
 {% hint style="info" %}
 Make a habit of logging to your server using a non-root account. This will prevent the accidental deletion of files if you make a mistake. For instance, the command rm can wipe your entire server if run incorrectly using by a root user.
