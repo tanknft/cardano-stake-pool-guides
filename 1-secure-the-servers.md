@@ -33,6 +33,8 @@ Add cardano to the sudo group
 usermod -aG sudo cardano
 ```
 
+**Now you should access the servers with MobaXterm, by editing the username to cardano**
+
 ## :lock\_with\_ink\_pen: **Disabling SSH Password Authentication and Using SSH Keys Only**
 
 
@@ -52,7 +54,10 @@ Open PowerShell in Windows and run the following:
 ssh-keygen -t ed25519
 ```
 
-In the end two files should be created inside C:\Users\**your_windows_user**
+In the end two files should be created inside C:\Users\ **your_windows_user**
+Open the file you created that ends as .pub with a notepad
+
+Now back to the server, run the following commands
 
 Transfer the public key to your remote node. Update the **keyname**.
 
