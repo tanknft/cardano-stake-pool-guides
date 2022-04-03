@@ -48,6 +48,7 @@ The basic rules of hardening SSH are:
 
 
 Create a new SSH key pair on your local machine. Run this on your local machine. You will be asked to type a file name in which to save the key. This will be your **keyname**.
+**YOU ONLY NEED TO DO THIS ONCE PER INSTALLATION. THE SAME KEY CAN BE USED BY ALL NODES**
 
 Open PowerShell in Windows and run the following:
 ```
@@ -56,7 +57,7 @@ ssh-keygen -t ed25519
 
 When running the command above, you will be asked to provide a name for the new key and a password. The password is not required and you can simply press Enter.
 
-the end two files should be created inside C:\Users\ **your_windows_user**
+In the end two files should be created inside C:\Users\ **your_windows_user**
 
 Open the file you created that ends as .pub with a notepad
 
