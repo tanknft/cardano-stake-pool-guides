@@ -69,7 +69,7 @@ nano authorized_keys
 ```
 Copy the contents of the .pub file you opened before into the nano text editor inside the server and save the file by pressing CTRL + X, pressing Y and then Enter
 
-Close the MobaXterm session for that server and edit the settings to connect with the keyfile you created inside C:\Users\ **your_windows_user** . You need to use the file that doesn't have an extension (the one that doesn't end as .pub).
+Close the MobaXterm session for that server and edit the session by going to Advanced SSH Settings, clicking "Use Private Key" and selecting the keyfile you created inside C:\Users\ **your_windows_user** . You need to use the file that doesn't have an extension (the one that doesn't end as .pub).
 
 ## Disable firewall
 ```
