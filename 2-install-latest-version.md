@@ -123,7 +123,7 @@ cabal build cardano-cli cardano-node
 
 Building process may take a few minutes up to a few hours depending on your computer's processing power.
 
-Copy **cardano-cli **and **cardano-node** files into bin directory.
+Copy **cardano-cli ** and **cardano-node** files into bin directory.
 
 ```bash
 sudo cp $(find $HOME/git/cardano-node/dist-newstyle/build -type f -name "cardano-cli") /usr/local/bin/cardano-cli
@@ -133,7 +133,7 @@ sudo cp $(find $HOME/git/cardano-node/dist-newstyle/build -type f -name "cardano
 sudo cp $(find $HOME/git/cardano-node/dist-newstyle/build -type f -name "cardano-node") /usr/local/bin/cardano-node
 ```
 
-Verify your **cardano-cli **and **cardano-node** are the expected versions.
+Verify your **cardano-cli ** and **cardano-node** are the expected versions.
 
 ```
 cardano-node version
