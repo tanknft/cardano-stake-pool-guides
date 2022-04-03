@@ -4,13 +4,13 @@
 
 ## Creating a Non-root User with sudo Privileges
 
-{% hint style="info" %}
-Make a habit of logging to your server using a non-root account. This will prevent the accidental deletion of files if you make a mistake. For instance, the command rm can wipe your entire server if run incorrectly using by a root user.
-{% endhint %}
 
-{% hint style="warning" %}
+Make a habit of logging to your server using a non-root account. This will prevent the accidental deletion of files if you make a mistake. For instance, the command rm can wipe your entire server if run incorrectly using by a root user.
+
+
+
 :fire: **Tip**: Do NOT routinely use the root account. Use `su` or `sudo`, always.
-{% endhint %}
+
 
 SSH to your server
 
@@ -40,7 +40,7 @@ usermod -aG sudo cardano
 
 ## :lock\_with\_ink\_pen: **Disabling SSH Password Authentication and Using SSH Keys Only**
 
-{% hint style="info" %}
+
 The basic rules of hardening SSH are:
 
 * No password for SSH access (use private key)
@@ -48,25 +48,16 @@ The basic rules of hardening SSH are:
 * Use `sudo` for users so commands are logged
 * Log unauthorized login attempts (and consider software to block/ban users who try to access your server too many times, like fail2ban)
 * Lock down SSH to only the ip range your require (if you feel like it)
-{% endhint %}
+
 
 Create a new SSH key pair on your local machine. Run this on your local machine. You will be asked to type a file name in which to save the key. This will be your **keyname**.
 
-Your choice of [ED25519 or RSA](https://goteleport.com/blog/comparing-ssh-keys/) public key algorithm.
-
-{% tabs %}
-{% tab title="ED25519" %}
+Open PowerShell in Windows and run the following:
 ```
 ssh-keygen -t ed25519
 ```
-{% endtab %}
 
-{% tab title="RSA" %}
-```bash
-ssh-keygen -t rsa -b 4096
-```
-{% endtab %}
-{% endtabs %}
+
 
 Transfer the public key to your remote node. Update the **keyname**.
 
