@@ -69,12 +69,12 @@ Copy the contents of the .pub file you opened before into the nano text editor i
 
 Close the MobaXterm session for that server and edit the settings to connect with the keyfile you created inside C:\Users\ **your_windows_user** . You need to use the file that doesn't have an extension (the one that doesn't end as .pub).
 
-# Disable firewall
+## Disable firewall
 ```
 sudo ufw disable
 ```
 
-Disable root login and password based login. Edit the `/etc/ssh/sshd_config file`
+## Disable root login and password based login. Edit the `/etc/ssh/sshd_config file` ##
 
 ```
 sudo nano /etc/ssh/sshd_config
