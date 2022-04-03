@@ -52,7 +52,7 @@ Open PowerShell in Windows and run the following:
 ssh-keygen -t ed25519
 ```
 
-
+In the end two files should be created inside C:\Users\**your_windows_user**
 
 Transfer the public key to your remote node. Update the **keyname**.
 
