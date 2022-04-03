@@ -61,13 +61,17 @@ Open the file you created that ends as .pub with a notepad
 Now back to the server, run the following commands:
 
 ```bash
-ssh-copy-id -i $HOME/.ssh/<keyname>.pub cardano@server.public.ip.address
+mkdir .ssh
+cd .ssh
+nano authorized_keys
 ```
+Copy the contents of the .pub file you opened before into the nano text editor inside the server and save the file.
 
-Login with your new cardano user
+Close the MobaXterm session for that server and edit the settings to connect with the keyfile you created inside C:\Users\ **your_windows_user** . You need to use the file that doesn't have an extension (the one that doesn't end as .pub).
 
+# Disable firewall
 ```
-ssh cardano@server.public.ip.address
+sudo ufw disable
 ```
 
 Disable root login and password based login. Edit the `/etc/ssh/sshd_config file`
@@ -88,7 +92,7 @@ Locate **PasswordAuthentication** update to no
 PasswordAuthentication no 
 ```
 
-Locate **PermitRootLogin** and update to prohibit-password
+Locate **PermitRootLogin** and update to no
 
 ```
 PermitRootLogin prohibit-password
@@ -99,16 +103,14 @@ Locate **PermitEmptyPasswords** and update to no
 ```
 PermitEmptyPasswords no
 ```
-
-**Optional**: Locate Port **and customize it to your random port number**.
-
-{% hint style="info" %}
-Use a **random** port # from 1024 thru 49141. [Check for possible conflicts.](https://en.wikipedia.org/wiki/List\_of\_TCP\_and\_UDP\_port\_numbers)
-{% endhint %}
+Locate **Port** and customize it to 5672
 
 ```bash
-Port <port number>
+Port 5672
 ```
+
+In the end save the file by pressy CTRL + X, pressing Y and then Enter
+
 
 Validate the syntax of your new SSH configuration.
 
@@ -122,58 +124,4 @@ If no errors with the syntax validation, restart the SSH process.
 sudo systemctl restart sshd
 ```
 
-Verify the login still works
-
-{% tabs %}
-{% tab title="Standard SSH Port 22" %}
-```
-ssh cardano@server.public.ip.address
-```
-{% endtab %}
-
-{% tab title="Custom SSH Port" %}
-```bash
-ssh cardano@server.public.ip.address -p <custom port number>
-```
-{% endtab %}
-{% endtabs %}
-
-{% hint style="info" %}
-Alternatively, add the `-p <port#>` flag if you used a custom SSH port.
-
-```bash
-ssh -i <path to your SSH_key_name.pub> cardano@server.public.ip.address
-```
-{% endhint %}
-
-**Optional**: Make logging in easier by updating your local ssh config.
-
-To simplify the ssh command needed to log in to your server, consider updating your local `$HOME/.ssh/config` file:
-
-```bash
-Host cardano-server
-  User cardano
-  HostName <server.public.ip.address>
-  Port <custom port number>
-```
-
-This will allow you to log in with `ssh cardano-server` rather than needing to pass through all ssh parameters explicitly.
-
-## :robot: **Updating Your System**
-
-{% hint style="warning" %}
-It's critically important to keep your system up-to-date with the latest patches to prevent intruders from accessing your system.
-{% endhint %}
-
-```bash
-sudo apt-get update -y && sudo apt-get upgrade -y
-sudo apt-get autoremove
-sudo apt-get autoclean
-```
-
-
-# Disable firewall
-sudo ufw disable
-```
-
-
+Verify the login still works by attempting to connect with MobaXterm using port 5672
