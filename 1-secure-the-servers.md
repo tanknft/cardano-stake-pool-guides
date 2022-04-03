@@ -55,11 +55,10 @@ ssh-keygen -t ed25519
 ```
 
 In the end two files should be created inside C:\Users\ **your_windows_user**
+
 Open the file you created that ends as .pub with a notepad
 
-Now back to the server, run the following commands
-
-Transfer the public key to your remote node. Update the **keyname**.
+Now back to the server, run the following commands:
 
 ```bash
 ssh-copy-id -i $HOME/.ssh/<keyname>.pub cardano@server.public.ip.address
