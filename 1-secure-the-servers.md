@@ -12,13 +12,8 @@ Make a habit of logging to your server using a non-root account. This will preve
 :fire: **Tip**: Do NOT routinely use the root account. Use `su` or `sudo`, always.
 
 
-SSH to your server
+SSH to your server using MobaXterm
 
-```bash
-ssh username@server.public.ip.address
-# example
-# ssh myUsername@77.22.161.10
-```
 
 Create a new user called cardano
 
