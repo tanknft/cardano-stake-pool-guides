@@ -65,7 +65,7 @@ mkdir .ssh
 cd .ssh
 nano authorized_keys
 ```
-Copy the contents of the .pub file you opened before into the nano text editor inside the server and save the file.
+Copy the contents of the .pub file you opened before into the nano text editor inside the server and save the file by pressing CTRL + X, pressing Y and then Enter
 
 Close the MobaXterm session for that server and edit the settings to connect with the keyfile you created inside C:\Users\ **your_windows_user** . You need to use the file that doesn't have an extension (the one that doesn't end as .pub).
 
@@ -109,7 +109,7 @@ Locate **Port** and customize it to 5672
 Port 5672
 ```
 
-In the end save the file by pressy CTRL + X, pressing Y and then Enter
+In the end save the file by pressing CTRL + X, pressing Y and then Enter
 
 
 Validate the syntax of your new SSH configuration.
