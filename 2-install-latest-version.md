@@ -121,9 +121,7 @@ Build the cardano-node from source code.
 cabal build cardano-cli cardano-node
 ```
 
-{% hint style="info" %}
 Building process may take a few minutes up to a few hours depending on your computer's processing power.
-{% endhint %}
 
 Copy **cardano-cli **and **cardano-node** files into bin directory.
 
