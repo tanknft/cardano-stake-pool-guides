@@ -118,6 +118,7 @@ git checkout $(curl -s https://api.github.com/repos/input-output-hk/cardano-node
 Configure build options.
 
 ```
+cabal update
 cabal configure -O0 -w ghc-8.10.7
 ```
 
