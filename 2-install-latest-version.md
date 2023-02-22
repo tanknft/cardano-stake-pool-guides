@@ -154,3 +154,67 @@ Verify your **cardano-cli ** and **cardano-node** are the expected versions.
 cardano-node version
 cardano-cli version
 ```
+
+
+## :triangular\_ruler: 3. Configure the nodes
+
+Here you'll grab the config.json, genesis.json, and topology.json files needed to configure your node.
+
+```bash
+mkdir $NODE_HOME
+cd $NODE_HOME
+wget -N https://book.world.dev.cardano.org/environments/mainnet/config.json -O config.json
+wget -N https://book.world.dev.cardano.org/environments/mainnet/db-sync-config.json -O db-sync-config.json
+wget -N https://book.world.dev.cardano.org/environments/mainnet/submit-api-config.json -O submit-api-config.json
+wget -N https://book.world.dev.cardano.org/environments/mainnet/byron-genesis.json -O byron-genesis.json
+wget -N https://book.world.dev.cardano.org/environments/mainnet/shelley-genesis.json -O shelley-genesis.json
+wget -N https://book.world.dev.cardano.org/environments/mainnet/alonzo-genesis.json -O alonzo-genesis.json
+```
+
+Run the following to modify **config.json** and&#x20;
+
+* update TraceBlockFetchDecisions to "true"
+
+```bash
+sed -i config.json \
+    -e "s/TraceBlockFetchDecisions\": false/TraceBlockFetchDecisions\": true/g"
+```
+
+Update **.bashrc **shell variables.
+
+```bash
+echo export CARDANO_NODE_SOCKET_PATH="$NODE_HOME/db/socket" >> $HOME/.bashrc
+source $HOME/.bashrc
+```
+
+
+## :crystal\_ball: 4. Configure the block-producer node
+
+{% hint style="info" %}
+A block producer node will be configured with various key-pairs needed for block generation (cold keys, KES hot keys and VRF hot keys). It can only connect to its relay nodes.
+{% endhint %}
+
+{% hint style="info" %}
+A relay node will not be in possession of any keys and will therefore be unable to produce blocks. It will be connected to its block-producing node, other relays and external nodes.
+{% endhint %}
+
+
+{% tabs %}
+{% tab title="block producer node" %}
+```bash
+cat > $NODE_HOME/topology.json << EOF 
+ {
+    "Producers": [
+      {
+        "addr": "<RELAYNODE1'S IP ADDRESS>",
+        "port": 6000,
+        "valency": 1
+      }
+    ]
+  }
+EOF
+```
+{% endtab %}
+{% endtabs %}
+
+
