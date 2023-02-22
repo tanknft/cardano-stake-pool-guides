@@ -224,7 +224,7 @@ You can have multiple relay nodes as you scale up your stake pool architecture. 
 On your **relaynode1, **run** **with the following after updating with your block producer's IP address.
 
 ```bash
-cat > $NODE_HOME/${NODE_CONFIG}-topology.json << EOF 
+cat > $NODE_HOME/topology.json << EOF 
  {
     "Producers": [
       {
