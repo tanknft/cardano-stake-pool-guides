@@ -314,11 +314,13 @@ CONFIG=\${DIRECTORY}/config.json
 EOF
 ```
 
+Run on Block Producer:
 Add execute permissions to the startup script.
 ```bash
 chmod +x $NODE_HOME/startBlockProducingNode.sh
 ```
 
+Run on RelayNode1:
 ```bash
 chmod +x $NODE_HOME/startRelayNode1.sh 
 ```
