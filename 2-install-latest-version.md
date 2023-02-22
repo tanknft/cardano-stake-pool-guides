@@ -190,17 +190,13 @@ source $HOME/.bashrc
 
 ## :crystal\_ball: 4. Configure the block-producer node
 
-{% hint style="info" %}
+
 A block producer node will be configured with various key-pairs needed for block generation (cold keys, KES hot keys and VRF hot keys). It can only connect to its relay nodes.
-{% endhint %}
 
-{% hint style="info" %}
+
 A relay node will not be in possession of any keys and will therefore be unable to produce blocks. It will be connected to its block-producing node, other relays and external nodes.
-{% endhint %}
 
 
-{% tabs %}
-{% tab title="block producer node" %}
 ```bash
 cat > $NODE_HOME/topology.json << EOF 
  {
@@ -214,7 +210,5 @@ cat > $NODE_HOME/topology.json << EOF
   }
 EOF
 ```
-{% endtab %}
-{% endtabs %}
 
 
