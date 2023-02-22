@@ -270,12 +270,203 @@ Location of your cardano-cli.
 /usr/local/bin/cardano-cli
 ```
 
-{% hint style="danger" %}
+
 In order to remain a true air-gapped environment, you must move files physically between your cold and hot environments with USB keys or other removable media.
-{% endhint %}
 
 After copying over to your cold environment, add execute permissions to the file.
 
 ```
 sudo chmod +x /usr/local/bin/cardano-cli
+```
+
+
+## :robot: 7. Create startup scripts
+
+The startup script contains all the variables needed to run a cardano-node such as directory, port, db path, config file, and topology file.
+
+Run on Block Producer:
+```bash
+cat > $NODE_HOME/startBlockProducingNode.sh << EOF 
+#!/bin/bash
+DIRECTORY=$NODE_HOME
+PORT=6000
+HOSTADDR=0.0.0.0
+TOPOLOGY=\${DIRECTORY}/topology.json
+DB_PATH=\${DIRECTORY}/db
+SOCKET_PATH=\${DIRECTORY}/db/socket
+CONFIG=\${DIRECTORY}/config.json
+/usr/local/bin/cardano-node run +RTS -N -RTS --topology \${TOPOLOGY} --database-path \${DB_PATH} --socket-path \${SOCKET_PATH} --host-addr \${HOSTADDR} --port \${PORT} --config \${CONFIG}
+EOF
+```
+
+Run on RelayNode1:
+```bash
+cat > $NODE_HOME/startRelayNode1.sh << EOF 
+#!/bin/bash
+DIRECTORY=$NODE_HOME
+PORT=6000
+HOSTADDR=0.0.0.0
+TOPOLOGY=\${DIRECTORY}/topology.json
+DB_PATH=\${DIRECTORY}/db
+SOCKET_PATH=\${DIRECTORY}/db/socket
+CONFIG=\${DIRECTORY}/config.json
+/usr/local/bin/cardano-node run +RTS -N -RTS --topology \${TOPOLOGY} --database-path \${DB_PATH} --socket-path \${SOCKET_PATH} --host-addr \${HOSTADDR} --port \${PORT} --config \${CONFIG}
+EOF
+```
+
+Add execute permissions to the startup script.
+```bash
+chmod +x $NODE_HOME/startBlockProducingNode.sh
+```
+
+```bash
+chmod +x $NODE_HOME/startRelayNode1.sh 
+```
+
+
+Run the following to create a **systemd unit file** to define your`cardano-node.service` configuration.
+
+
+#### :cake: Benefits of using systemd for your stake pool
+
+1. Auto-start your stake pool when the computer reboots due to maintenance, power outage, etc.
+2. Automatically restart crashed stake pool processes.
+3. Maximize your stake pool up-time and performance.
+
+
+Run on Block Producer:
+```bash
+cat > $NODE_HOME/cardano-node.service << EOF 
+# The Cardano node service (part of systemd)
+# file: /etc/systemd/system/cardano-node.service 
+
+[Unit]
+Description     = Cardano node service
+Wants           = network-online.target
+After           = network-online.target 
+
+[Service]
+User            = ${USER}
+Type            = simple
+WorkingDirectory= ${NODE_HOME}
+ExecStart       = /bin/bash -c '${NODE_HOME}/startBlockProducingNode.sh'
+KillSignal=SIGINT
+RestartKillSignal=SIGINT
+TimeoutStopSec=300
+LimitNOFILE=32768
+Restart=always
+RestartSec=5
+SyslogIdentifier=cardano-node
+
+[Install]
+WantedBy	= multi-user.target
+EOF
+```
+
+
+Run on RelayNode1:
+```bash
+cat > $NODE_HOME/cardano-node.service << EOF 
+# The Cardano node service (part of systemd)
+# file: /etc/systemd/system/cardano-node.service 
+
+[Unit]
+Description     = Cardano node service
+Wants           = network-online.target
+After           = network-online.target 
+
+[Service]
+User            = ${USER}
+Type            = simple
+WorkingDirectory= ${NODE_HOME}
+ExecStart       = /bin/bash -c '${NODE_HOME}/startRelayNode1.sh'
+KillSignal=SIGINT
+RestartKillSignal=SIGINT
+TimeoutStopSec=300
+LimitNOFILE=32768
+Restart=always
+RestartSec=5
+SyslogIdentifier=cardano-node
+
+[Install]
+WantedBy	= multi-user.target
+EOF
+```
+
+
+Move the unit file to `/etc/systemd/system` and give it permissions.
+
+```bash
+sudo mv $NODE_HOME/cardano-node.service /etc/systemd/system/cardano-node.service
+```
+
+```bash
+sudo chmod 644 /etc/systemd/system/cardano-node.service
+```
+
+Run the following to enable auto-starting of your stake pool at boot time.
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable cardano-node
+```
+
+Your stake pool is now managed by the reliability and robustness of systemd. Below are some commands for using systemd.
+
+
+
+#### :arrows\_counterclockwise: Restarting the node service
+
+```
+sudo systemctl reload-or-restart cardano-node
+```
+
+#### 🗄 Viewing and filter logs
+
+```bash
+journalctl --unit=cardano-node --follow
+```
+
+
+## :white\_check\_mark: 8. Start the nodes
+
+Start your stake pool with systemctl and begin syncing the blockchain!
+
+
+```bash
+sudo systemctl start cardano-node
+```
+
+Install gLiveView, a monitoring tool.
+
+
+gLiveView displays crucial node status information and works well with systemd services. Credits to the [Guild Operators](https://cardano-community.github.io/guild-operators/#/Scripts/gliveview) for creating this tool.
+
+
+```bash
+cd $NODE_HOME
+sudo apt install bc tcptraceroute -y
+curl -s -o gLiveView.sh https://raw.githubusercontent.com/cardano-community/guild-operators/master/scripts/cnode-helper-scripts/gLiveView.sh
+curl -s -o env https://raw.githubusercontent.com/cardano-community/guild-operators/master/scripts/cnode-helper-scripts/env
+chmod 755 gLiveView.sh
+```
+
+Run the following to modify **env** with the updated file locations.
+
+```bash
+sed -i env \
+    -e "s/\#CONFIG=\"\${CNODE_HOME}\/files\/config.json\"/CONFIG=\"\${NODE_HOME}\/mainnet-config.json\"/g" \
+    -e "s/\#SOCKET=\"\${CNODE_HOME}\/sockets\/node0.socket\"/SOCKET=\"\${NODE_HOME}\/db\/socket\"/g"
+```
+
+A node must reach epoch 208 (Shelley launch) before **gLiveView.sh** can start tracking the node syncing. You can track the node syncing using `journalctl `before epoch 208.
+
+```
+journalctl --unit=cardano-node --follow
+```
+
+Run gLiveView to monitor the progress of the sync'ing of the blockchain.
+
+```
+./gLiveView.sh
 ```
