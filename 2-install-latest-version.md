@@ -169,6 +169,7 @@ wget -N https://book.world.dev.cardano.org/environments/mainnet/submit-api-confi
 wget -N https://book.world.dev.cardano.org/environments/mainnet/byron-genesis.json -O byron-genesis.json
 wget -N https://book.world.dev.cardano.org/environments/mainnet/shelley-genesis.json -O shelley-genesis.json
 wget -N https://book.world.dev.cardano.org/environments/mainnet/alonzo-genesis.json -O alonzo-genesis.json
+wget -N https://book.world.dev.cardano.org/environments/mainnet/conway-genesis.json -O conway-genesis.json
 ```
 
 Run the following to modify **config.json** and&#x20;
