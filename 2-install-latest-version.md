@@ -54,8 +54,8 @@ Answer **YES **to automatically add the required PATH variable to ".bashrc".
 cd $HOME
 source .bashrc
 ghcup upgrade
-ghcup install cabal 3.6.2.0
-ghcup set cabal 3.6.2.0
+ghcup install cabal 3.8.1.0
+ghcup set cabal 3.8.1.0
 ```
 
 Install GHC.
