@@ -23,10 +23,11 @@ mkdir $HOME/git
 cd $HOME/git
 git clone https://github.com/input-output-hk/libsodium
 cd libsodium
-git checkout 66f017f1
+git checkout dbb48cc
 ./autogen.sh
 ./configure
 make
+make check
 sudo make install
 ```
 
@@ -70,6 +71,7 @@ Update PATH to include Cabal and GHC and add exports. Your node's location will 
 ```bash
 echo PATH="$HOME/.local/bin:$PATH" >> $HOME/.bashrc
 echo export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH" >> $HOME/.bashrc
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH" >> $HOME/.bashrc
 echo export NODE_HOME=$HOME/cardano-my-node >> $HOME/.bashrc
 echo export NODE_CONFIG=mainnet>> $HOME/.bashrc
 source $HOME/.bashrc
