@@ -214,6 +214,13 @@ sed -i config.json \
     -e "s/TraceBlockFetchDecisions\": false/TraceBlockFetchDecisions\": true/g"
 ```
 
+* update TraceBlockFetchDecisions to "true"
+
+```bash
+sed -i config.json \
+    -e "s/EnableP2P\": true/EnableP2P\": false/g"
+```
+
 Update **.bashrc **shell variables.
 
 ```bash
