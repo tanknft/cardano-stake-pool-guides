@@ -91,6 +91,12 @@ make check
 sudo make install
 ```
 
+Link libsecp256k1.
+
+```bash
+sudo ln -s /usr/local/lib/libsecp256k1.so.0 /usr/lib/libsecp256k1.so.0
+```
+
 
 
 Installing BLST
