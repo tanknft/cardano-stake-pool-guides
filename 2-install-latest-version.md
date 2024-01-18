@@ -159,18 +159,13 @@ echo "  flags: -homebrew-openssl" >> cabal.project.local
 echo "" >> cabal.project.local
 ```
 
-Update the cabal config, project settings, and reset build folder.
 
-```bash
-echo -e "package cardano-crypto-praos\n flags: -external-libsodium-vrf" > cabal.project.local
-sed -i $HOME/.cabal/config -e "s/overwrite-policy:/overwrite-policy: always/g"
-rm -rf $HOME/git/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.7
-```
-
-Build the cardano-node from source code.
+Building and installing the node
 
 ```
-cabal build cardano-cli cardano-node
+cabal update
+cabal build all
+cabal build cardano-cli
 ```
 
 Building process may take a few minutes up to a few hours depending on your computer's processing power.
