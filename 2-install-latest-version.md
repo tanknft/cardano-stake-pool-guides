@@ -140,10 +140,10 @@ Download source code and switch to the latest tag.
 
 ```bash
 cd $HOME/git
-git clone https://github.com/input-output-hk/cardano-node.git
+git clone https://github.com/intersectmbo/cardano-node.git
 cd cardano-node
 git fetch --all --recurse-submodules --tags
-git checkout $(curl -s https://api.github.com/repos/input-output-hk/cardano-node/releases/latest | jq -r .tag_name)
+git checkout $(curl -s https://api.github.com/repos/IntersectMBO/cardano-node/releases/latest | jq -r .tag_name)
 ```
 
 Configure build options.
