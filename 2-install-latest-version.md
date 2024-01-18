@@ -129,7 +129,7 @@ cabal --version
 ghc --version
 ```
 
-Cabal library should be version 3.6.2.0 and GHC should be version 8.10.7
+Cabal library should be version 3.8.1.0 and GHC should be version 8.10.7
 
 
 
