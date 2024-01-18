@@ -193,6 +193,7 @@ cardano-cli version
 Here you'll grab the config.json, genesis.json, and topology.json files needed to configure your node.
 
 ```bash
+cd $HOME
 mkdir $NODE_HOME
 cd $NODE_HOME
 wget https://book.world.dev.cardano.org/environments/mainnet/config.json
