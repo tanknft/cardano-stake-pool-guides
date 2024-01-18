@@ -125,7 +125,6 @@ sudo chmod u=rw,go=r /usr/local/{lib/{libblst.a,pkgconfig/libblst.pc},include/{b
 Update cabal and verify the correct versions were installed successfully.
 
 ```bash
-cabal update
 cabal --version
 ghc --version
 ```
