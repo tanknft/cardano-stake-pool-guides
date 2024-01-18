@@ -13,7 +13,7 @@ sudo apt-get upgrade -y
 ```
 
 ```
-sudo apt-get install automake build-essential pkg-config libffi-dev libgmp-dev libssl-dev libtinfo-dev libsystemd-dev zlib1g-dev make g++ tmux git jq wget libncursesw5 libtool autoconf liblmdb-dev llvm libnuma-dev libsodium-dev -y
+sudo apt-get install automake build-essential pkg-config libffi-dev libgmp-dev libssl-dev libtinfo-dev libsystemd-dev zlib1g-dev make g++ tmux git jq wget libncursesw5 libtool autoconf liblmdb-dev -y
 ```
 
 Install Libsodium.
@@ -40,7 +40,7 @@ sudo ln -s /usr/local/lib/libsodium.so.23.3.0 /usr/lib/libsodium.so.23
 Install Cabal and dependencies.
 
 ```bash
-sudo apt-get -y install pkg-config libgmp-dev libssl-dev libtinfo-dev libsystemd-dev zlib1g-dev build-essential curl libgmp-dev libffi-dev libncurses-dev libtinfo5
+sudo apt-get -y install curl libtinfo5 libffi-dev libffi7 libgmp-dev libgmp10 libncurses-dev libncurses5 libsodium-dev
 ```
 
 ```bash
