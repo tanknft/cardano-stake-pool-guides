@@ -179,11 +179,11 @@ Building process may take a few minutes up to a few hours depending on your comp
 Copy **cardano-cli ** and **cardano-node** files into bin directory.
 
 ```bash
-sudo cp $(find $HOME/git/cardano-node/dist-newstyle/build -type f -name "cardano-cli") /usr/local/bin/cardano-cli
+sudo cp -p "$(./scripts/bin-path.sh cardano-node)" /usr/local/bin/cardano-node
 ```
 
 ```bash
-sudo cp $(find $HOME/git/cardano-node/dist-newstyle/build -type f -name "cardano-node") /usr/local/bin/cardano-node
+sudo cp -p "$(./scripts/bin-path.sh cardano-cli)" /usr/local/bin/cardano-cli
 ```
 
 Verify your **cardano-cli ** and **cardano-node** are the expected versions.
