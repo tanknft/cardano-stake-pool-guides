@@ -220,13 +220,6 @@ sed -i config.json \
     -e "s/TraceBlockFetchDecisions\": false/TraceBlockFetchDecisions\": true/g"
 ```
 
-* update EnableP2P to "false"
-
-```bash
-sed -i config.json \
-    -e "s/EnableP2P\": true/EnableP2P\": false/g"
-```
-
 Update **.bashrc **shell variables.
 
 ```bash
@@ -247,14 +240,19 @@ A relay node will not be in possession of any keys and will therefore be unable 
 ```bash
 cat > $NODE_HOME/topology.json << EOF 
  {
-    "Producers": [
-      {
-        "addr": "<RELAYNODE1'S IP ADDRESS>",
-        "port": 6000,
-        "valency": 1
-      }
-    ]
-  }
+  "bootstrapPeers": [],
+  "localRoots": [
+    { "accessPoints": [
+      { "address": "<RELAYNODE1'S IP ADDRESS>", "port": 6000, "name": "Relay 1" }
+    ],
+      "advertise": false,
+      "trustable": true,
+      "valency": 1
+    }
+  ],
+  "publicRoots": [],
+  "useLedgerAfterSlot": -1
+}
 EOF
 ```
 
@@ -272,20 +270,42 @@ On your **relaynode1, **run** **with the following after updating with your bloc
 
 ```bash
 cat > $NODE_HOME/topology.json << EOF 
- {
-    "Producers": [
+{
+  "bootstrapPeers": [
+    {
+      "address": "backbone.cardano.iog.io",
+      "port": 3001
+    },
+    {
+      "address": "backbone.mainnet.emurgornd.com",
+      "port": 3001
+    },
+    {
+      "address": "backbone.mainnet.cardanofoundation.org",
+      "port": 3001
+    }
+  ],
+  "localRoots": [
+    {
+      "accessPoints": [
       {
-        "addr": "<BLOCK PRODUCER NODE'S IP ADDRESS>",
-        "port": 6000,
-        "valency": 1
-      },
-      {
-        "addr": "relays-new.cardano-mainnet.iohk.io",
-        "port": 3001,
-        "valency": 2
-      }
-    ]
-  }
+          "address": "<BLOCK PRODUCER'S IP ADDRESS>",
+          "port": 6000
+        }
+      ],
+      "advertise": false,
+      "trustable": false,
+      "valency": 1 
+    }
+  ],
+  "publicRoots": [
+    {
+      "accessPoints": [],
+      "advertise": false
+    }
+  ],
+  "useLedgerAfterSlot": 116812831
+}
 EOF
 ```
 
