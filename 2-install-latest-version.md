@@ -55,15 +55,15 @@ Answer **YES **to automatically add the required PATH variable to ".bashrc".
 cd $HOME
 source .bashrc
 ghcup upgrade
-ghcup install cabal 3.8.1.0
-ghcup set cabal 3.8.1.0
+ghcup install cabal 3.10.2.0
+ghcup set cabal 3.10.2.0
 ```
 
 Install GHC.
 
 ```bash
-ghcup install ghc 8.10.7
-ghcup set ghc 8.10.7
+ghcup install ghc 9.6.6
+ghcup set ghc 9.6.6
 ```
 
 Update PATH to include Cabal and GHC and add exports. Your node's location will be in **$NODE\_HOME**. The [cluster configuration](https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html) is set by **$NODE\_CONFIG**.&#x20;
