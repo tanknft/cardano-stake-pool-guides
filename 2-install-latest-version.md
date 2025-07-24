@@ -208,6 +208,7 @@ wget https://book.world.dev.cardano.org/environments/mainnet/byron-genesis.json
 wget https://book.world.dev.cardano.org/environments/mainnet/shelley-genesis.json
 wget https://book.world.dev.cardano.org/environments/mainnet/alonzo-genesis.json
 wget https://book.world.dev.cardano.org/environments/mainnet/conway-genesis.json
+wget -O checkpoints.json https://book.play.dev.cardano.org/environments/mainnet/checkpoints.json
 
 ```
 
@@ -218,6 +219,13 @@ Run the following to modify **config.json** and&#x20;
 ```bash
 sed -i config.json \
     -e "s/TraceBlockFetchDecisions\": false/TraceBlockFetchDecisions\": true/g"
+```
+
+* update TraceMemPool to "true"
+
+```bash
+sed -i config.json \
+   -e "s/TraceMempool\": false/TraceMempool\": true/g"
 ```
 
 Update **.bashrc **shell variables.
