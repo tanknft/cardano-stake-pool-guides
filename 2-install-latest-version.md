@@ -155,14 +155,14 @@ git checkout $(curl -s https://api.github.com/repos/IntersectMBO/cardano-node/re
 Configure build options.
 
 ```
-echo "with-compiler: ghc-8.10.7" >> cabal.project.local
+echo "with-compiler: ghc-9.6.6" >> cabal.project.local
 echo "package trace-dispatcher" >> cabal.project.local
 echo "  ghc-options: -Wwarn" >> cabal.project.local
 echo "" >> cabal.project.local
-
 echo "package HsOpenSSL" >> cabal.project.local
 echo "  flags: -homebrew-openssl" >> cabal.project.local
 echo "" >> cabal.project.local
+
 ```
 
 
