@@ -105,7 +105,7 @@ Installing BLST
 cd $HOME
 git clone https://github.com/supranational/blst
 cd blst
-git checkout v0.3.10
+git checkout v0.3.14
 ./build.sh
 cat > libblst.pc << EOF
 prefix=/usr/local
@@ -116,7 +116,7 @@ includedir=\${prefix}/include
 Name: libblst
 Description: Multilingual BLS12-381 signature library
 URL: https://github.com/supranational/blst
-Version: 0.3.10
+Version: 0.3.14
 Cflags: -I\${includedir}
 Libs: -L\${libdir} -lblst
 EOF
